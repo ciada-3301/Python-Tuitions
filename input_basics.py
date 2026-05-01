@@ -6,11 +6,6 @@ gender = input("Enter your Gender: ")
 print("The name is" , name , "and your age is", age, "and gender is", gender)
 
 sum = 0
-for i in range (1,1000):
-    sum = sum + i
-print(sum)
 
-
-
-
+print("Hello, my name is Arkadyuti Maiti", sum)
 
