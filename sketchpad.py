@@ -1,38 +1,47 @@
-# gross division algorithm
-
 import random
-upper = 100
-lower = 500
-seed = random.randint(upper, lower)
-print("Unsorted Seed: ", seed)
+
+# Fix 1: Correct the upper/lower bounds
+lower = 100
+upper = 500
+seed = random.randint(lower, upper)
+
 if seed % 2 != 0:
-    seed+=1
-else:
-    pass
+    seed += 1
 
-seedlings = list([""]*seed)
-print(len(seedlings))
+# Generate the list (assume we don't know its length)
+seedlings = [""] * seed
+print(f"Secret total length created by system: {len(seedlings)}")
 
-gross_guess = random.randint(50, 600)
-print("Gross Guess: ", gross_guess)
-up = len(seedlings[:gross_guess])
-low = len(seedlings[gross_guess:])
+# Fix 2 & 3: Gross Division without using len() or list slicing
+slow_index = 0
+fast_index = 0
+
+# We use an iterator to mimic streaming items without knowing the end
+iterator = iter(seedlings)
 divided = False
-while not divided:
-    up = len(seedlings[:gross_guess])
-    low = len(seedlings[gross_guess:])
-    error = up/low
 
-    if error == 1:
-        print("Solved!, found solution at: ", up, low)
+print("\nScanning list progressively...")
+while not divided:
+    try:
+        # Move fast pointer 2 steps forward
+        next(iterator)
+        next(iterator)
+        
+        # Move slow pointer 1 step forward
+        slow_index += 1
+        fast_index += 2
+        
+    except StopIteration:
+        # The fast pointer hit the end of the list!
+        # The slow pointer is now perfectly at the midpoint.
         divided = True
 
-    else:
-        gross_guess = gross_guess * error
-        print(f"Not solved, error found {error}")
-        print("Trying new division at: ", gross_guess)
+# Validation
+up_partition = seedlings[:slow_index]
+low_partition = seedlings[slow_index:]
 
-
-
-
-
+print("\nSolved!")
+print(f"-> Calculated Midpoint Index: {slow_index}")
+print(f"-> Upper segment count: {len(up_partition)}")
+print(f"-> Lower segment count: {len(low_partition)}")
+print(f"-> Balanced? {len(up_partition) == len(low_partition)}")
