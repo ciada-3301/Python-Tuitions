@@ -1,9 +1,8 @@
-# Dictionaries are data setructures that help you to 
+Salary = int(input("Enter your salary: "))
+Age = int(input("Enter your Age: "))
+Name = input("Enter your Name: ")
+Address = input("Enter your Address: ")
 
-alex = {"Name":"Alex", "Gender": "Male"}      # Initialization, Name and Gender are keys
-steve = {"Name":"Steve", "Gender": "Female"}  # Initialization 
+emp_data = {"Salary": Salary, "age":Age, "Name": Name, "Address": Address}
 
-print(alex["Name"])  # Retrieving information from an dictionary
-
-steve["Age"] = 21   # Add new key, value pairs to an existing dictionary
-
+print(emp_data)
